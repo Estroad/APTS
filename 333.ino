@@ -3,7 +3,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define SSID        "hhhkkkhhhkkk"  
+#define SSID        "hhkkhhkk" 
 
 #define PASSWORD    "111111asd"  
 
@@ -26,7 +26,7 @@ ESP8266 wifi(mySerial);
 // Init array that will store new NUID 
 byte nuidPICC[4];
 int getnum[12];
-//uint8_t *getnum2[12];
+uint8_t getnum2[12];
 
 uint8_t *asd;
 int tmp;
@@ -74,7 +74,7 @@ void setup() {
   Serial.print(F("Using the following key:"));
   printHex(key.keyByte, MFRC522::MF_KEY_SIZE);
 
-    if(wifi.createTCP("192.168.0.20", 23)){
+    if(wifi.createTCP(HOST_NAME, HOST_PORT)){
        uint8_t sbuf[] = "ready";
          wifi.send(sbuf, strlen(sbuf));
          char *test ="test!!";
@@ -211,17 +211,65 @@ void printDec(byte *buffer, byte bufferSize) {
 
 
 void sendme(){
-  uint8_t *aaa="";
+ 
 
      for(int i = 0; i<=11;i++){
+       uint8_t a1[]="1";
+       uint8_t a2[]="2";
+       uint8_t a3[]="3";
+       uint8_t a4[]="4";
+       uint8_t a5[]="5";
+       uint8_t a6[]="6";
+       uint8_t a7[]="7";
+       uint8_t a8[]="8";
+       uint8_t a9[]="9";
+       uint8_t a0[]="0";
+       
+       
+       
         Serial.print(getnum[i]);
-        //strcat(aaa,getnum[i]);
-     // aaa += getnum[i];
-      //getnum2[i] = getnum[i];
+       // Serial.print("  ");
+        //strcat(aaa, getnum[i]);
+         //aaa += (uint8_t) getnum[i]; //<---------------???
+        switch(getnum[i]){
+          case 1:
+          wifi.send(a1,1);
+          break;
+          case 2:
+          wifi.send(a2,1);
+          break;
+          case 3:
+          wifi.send(a3,1);
+          break;
+          case 4:
+          wifi.send(a4,1);
+          break;
+          case 5:
+          wifi.send(a5,1);
+          break;
+          case 6:
+          wifi.send(a6,1);
+          break;
+          case 7:
+          wifi.send(a7,1);
+          break;
+          case 8:
+          wifi.send(a8,1);
+          break;
+          case 9:
+          wifi.send(a9,1);
+          break;
+          default:
+          wifi.send(a0,1);
+          break;
+          
+          
+        }
       }
-      
-//wifi.send( aaa,12);
-//wifi.send( getnum2,12);
+       //Serial.print(*aaa);
+      //wifi.send(aaa, 10);
+      //Serial.print(aaa[0]);
+     // wifi.send(aaa,1);
 
      /*if( wifi.send( asd,strlen(asd))){
       Serial.print("sendok");
@@ -229,4 +277,4 @@ void sendme(){
      else{
       Serial.print("WHYYYYYYYYYYYY");
 }*/
-}
+} 
