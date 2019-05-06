@@ -3,7 +3,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define SSID        "hhkkhhkk" 
+#define SSID        "hhhkkkhhhkkk" 
 
 #define PASSWORD    "111111asd"  
 
@@ -74,10 +74,10 @@ void setup() {
   Serial.print(F("Using the following key:"));
   printHex(key.keyByte, MFRC522::MF_KEY_SIZE);
 
-    if(wifi.createTCP(HOST_NAME, HOST_PORT)){
+    if(wifi.createTCP("192.168.0.20", 20)){
        uint8_t sbuf[] = "ready";
          wifi.send(sbuf, strlen(sbuf));
-         char *test ="test!!";
+         char *test ="\n";
          uint32_t s = strlen(test);
          wifi.send(test,s);
       
@@ -265,11 +265,10 @@ void sendme(){
           
           
         }
+        
       }
-       //Serial.print(*aaa);
-      //wifi.send(aaa, 10);
-      //Serial.print(aaa[0]);
-     // wifi.send(aaa,1);
+      uint8_t finish[]="\n";
+        wifi.send(finish,3);
 
      /*if( wifi.send( asd,strlen(asd))){
       Serial.print("sendok");
